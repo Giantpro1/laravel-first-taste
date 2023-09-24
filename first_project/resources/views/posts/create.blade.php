@@ -68,29 +68,38 @@
         </div>
 
         <div class="row g-5">
+            <h1>Create a Post</h1>
             <div class="col-md-8">
-                <form>
+                <form action="/posts" method="POST">
+
+                    {{csrf_field()}}
+                    <div class="col-md-12 mb-2">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Title: </label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" name="title" placeholder="">
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-2">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Decription: </label>
+                            <textarea name="body" class="form-control" id="body" cols="30" rows="10"></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary px-5 ">Publish</button>
+                    @if(count($errors))
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                <li>{{ $error}}</li>
+                                @endforeach
+                            </ul>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputFile">File input</label>
-                        <input type="file" id="exampleInputFile">
-                        <p class="help-block">Example block-level help text here.</p>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox"> Check me out
-                        </label>
-                    </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
+                    @endif
                 </form>
             </div>
+
 
             {{-- @include('layouts.rightnav') --}}
 
